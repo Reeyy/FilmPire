@@ -3,6 +3,7 @@ import { Route, Routes } from 'react-router-dom';
 import Actors from './Actors/Actors';
 import Movie from './Movie/Movie';
 import MovieInformation from './MovieInformation/MovieInformation';
+import Movies from './Movies/Movies';
 import Navbar from './Navbar/Navbar';
 import Profile from './Profile/Profile';
 
@@ -17,7 +18,7 @@ export default function App() {
       <main className={classes.content}>
         <div className={classes.toolbar} />
         <Routes>
-          <Route path="/" element={<Movie />} />
+          <Route path="/" element={<Movies />} />
           <Route path="/actors/:id" element={<Actors />} />
           <Route path="/profile/:id" element={<Profile />} />
           <Route path="/movie/:id" element={<MovieInformation />} />
