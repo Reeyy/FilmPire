@@ -3,18 +3,21 @@ import { Divider, List, ListItem, ListItemText, ListSubheader, ListItemIcon, Box
 import { Link } from 'react-router-dom';
 import { useTheme } from '@mui/styles';
 import useStyles from './styles';
+import { useGetGenresQuery } from '../../services/TMDB';
 
 export default function Sidebar() {
+  const { data, isFetching } = useGetGenresQuery();
+  console.log(data);
   const categories = [
     { label: 'Popular', value: 'popular' },
     { label: 'Top Rated', value: 'top_rated' },
     { label: 'Upcoming', value: 'upcoming' },
   ];
-  const demoCatagories = [
-    { label: 'comedy', value: 'comedyr' },
-    { label: 'action', value: 'actiond' },
-    { label: 'horror', value: 'horror' },
-  ];
+  // const demoCatagories = [
+  //   { label: 'comedy', value: 'comedyr' },
+  //   { label: 'action', value: 'actiond' },
+  //   { label: 'horror', value: 'horror' },
+  // ];
 
   const theme = useTheme();
   const classes = useStyles();
@@ -32,17 +35,26 @@ export default function Sidebar() {
       <Divider />
       <List>
         <ListSubheader>Genre</ListSubheader>
-        {demoCatagories.map(({ label, value }) => (
-          <Link key={value} className={classes.links} to="/">
-            <ListItem button onClick={() => {}}>
-              {/* <ListItemIcon>
+        {
+        isFetching ? (
+          <Box display="flex" justifyContent="cener">
+            <CircularProgress size="4rem" />
+          </Box>
+
+        )
+
+          : data.genres.map(({ name, id }) => (
+            <Link key={name} className={classes.links} to="/">
+              <ListItem button onClick={() => {}}>
+                {/* <ListItemIcon>
                 <img src={redLogo} className={classes.genreImages} height={30} />
               </ListItemIcon> */}
-              <ListItemText primary={label} />
-            </ListItem>
-          </Link>
+                <ListItemText primary={name} />
+              </ListItem>
+            </Link>
 
-        ))}
+          ))
+}
       </List>
       <List>
         <ListSubheader>Categories</ListSubheader>

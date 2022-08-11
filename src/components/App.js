@@ -1,7 +1,6 @@
 import { CssBaseline } from '@mui/material';
 import { Route, Routes } from 'react-router-dom';
 import Actors from './Actors/Actors';
-import Movie from './Movie/Movie';
 import MovieInformation from './MovieInformation/MovieInformation';
 import Movies from './Movies/Movies';
 import Navbar from './Navbar/Navbar';
