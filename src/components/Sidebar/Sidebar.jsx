@@ -4,6 +4,7 @@ import { Link } from 'react-router-dom';
 import { useTheme } from '@mui/styles';
 import useStyles from './styles';
 import { useGetGenresQuery } from '../../services/TMDB';
+import genreIcons from '../../assets/genres';
 
 export default function Sidebar() {
   const { data, isFetching } = useGetGenresQuery();
@@ -34,6 +35,20 @@ export default function Sidebar() {
       </Link>
       <Divider />
       <List>
+        <ListSubheader>Categories</ListSubheader>
+        {categories.map(({ label, value }) => (
+          <Link key={value} className={classes.links} to="/">
+            <ListItem button onClick={() => {}}>
+              <ListItemIcon>
+                <img src={genreIcons[label.toLowerCase()]} className={classes.genreImages} width={30} height={30} />
+              </ListItemIcon>
+              <ListItemText primary={label} />
+            </ListItem>
+          </Link>
+
+        ))}
+      </List>
+      <List>
         <ListSubheader>Genre</ListSubheader>
         {
         isFetching ? (
@@ -46,29 +61,15 @@ export default function Sidebar() {
           : data.genres.map(({ name, id }) => (
             <Link key={name} className={classes.links} to="/">
               <ListItem button onClick={() => {}}>
-                {/* <ListItemIcon>
-                <img src={redLogo} className={classes.genreImages} height={30} />
-              </ListItemIcon> */}
+                <ListItemIcon>
+                  <img src={genreIcons[name.toLowerCase()]} className={classes.genreImages} width={30} height={30} />
+                </ListItemIcon>
                 <ListItemText primary={name} />
               </ListItem>
             </Link>
 
           ))
 }
-      </List>
-      <List>
-        <ListSubheader>Categories</ListSubheader>
-        {categories.map(({ label, value }) => (
-          <Link key={value} className={classes.links} to="/">
-            <ListItem button onClick={() => {}}>
-              {/* <ListItemIcon>
-                <img src={redLogo} className={classes.genreImages} height={10} />
-              </ListItemIcon> */}
-              <ListItemText primary={label} />
-            </ListItem>
-          </Link>
-
-        ))}
       </List>
 
     </>
