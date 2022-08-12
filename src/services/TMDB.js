@@ -13,7 +13,19 @@ export const tmdbApi = createApi({
     }),
     // get movies by [type]
     getMovies: builder.query({
-      query: () => `movie/popular?page=${page}&api_key=${tmdbApiKey}`,
+      query: ({ genreIdOrCategoryName, page }) => {
+        if (genreIdOrCategoryName && typeof genreIdOrCategoryName === 'string') {
+          return `/movie/${genreIdOrCategoryName}?page=${page}&api_key=${tmdbApiKey}`;
+        }
+        // console.log(genreIdOrCategoryName);
+        // Get Movies by Genre
+        if (genreIdOrCategoryName && typeof genreIdOrCategoryName === 'number') {
+          return `discover/movie?with_genres=${genreIdOrCategoryName}&page=${page}&api_key=${tmdbApiKey}`;
+        }
+
+        // Get popular movies by default
+        return `/movie/popular?page=${page}&api_key=${tmdbApiKey}`;
+      },
     }),
 
   }),
