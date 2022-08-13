@@ -4,6 +4,7 @@ import { Link } from 'react-router-dom';
 import { useState } from 'react';
 import useStyles from './styles';
 import Sidebar from '../Sidebar/Sidebar';
+import Search from '../Serach/Search';
 
 export default function Navbar() {
   const classes = useStyles();
@@ -34,7 +35,7 @@ export default function Navbar() {
           >
             {theme.palette.mode === 'dark' ? <Brightness7 /> : <Brightness4 />}
           </IconButton>
-          {!isMobile && 'search...'}
+          {!isMobile && <Search />}
           <div>
             {!isAuthenticated ? (
               <Button color="inherit" onClick={() => {}}>
@@ -58,7 +59,7 @@ export default function Navbar() {
               </Button>
             )}
           </div>
-          {isMobile && 'search...'}
+          {isMobile && <Search />}
         </Toolbar>
 
       </AppBar>
