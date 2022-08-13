@@ -6,7 +6,9 @@ import MovieList from '../MovieList/MovieList';
 
 export default function Movies() {
   const { page, setPage } = useState(1);
+  //* ambil data dari store useSelector
   const { genreIdOrCategoryName, searchQuery } = useSelector((state) => state.currentGenreOrCategory);
+  //* useDispatch untuk action
   const { data, error, isFetching } = useGetMoviesQuery({ genreIdOrCategoryName, page, searchQuery });
   if (isFetching) {
     return (
